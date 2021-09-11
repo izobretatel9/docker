@@ -1,9 +1,10 @@
 #!/bin/bash
-#by @izobretatel
+#by @eberil
+#CHANGED by @izobretatel
 
 #who run script?
 RUN_USER=$(export | grep SUDO_USER | sed 's/declare\|-\|x\|SUDO_USER\|=\|"\| //g')
-echo -e "\e[33mHello \e[0m\e[1m$RUN_USER"
+echo -e "\e[33mHello \e[0m\e[1m$RUN_USER'!\e[0m"
 echo ""
 
 #lets go
@@ -57,7 +58,6 @@ then
   if [ $NEW_VER_CLIENT == $CURRENT_VER_CLIENT ] && [ $NEW_VER_ENGINE == $CURRENT_VER_ENGINE ]
   then
     echo -e "\e[32m Docker stack up-to-date!\e[0m"
-  exit 0
   else
     echo -e "\e[32m Docker \e[0m\e[1mdocker-ce docker-ce-cli containerd.io \e[32msuccesfully installed\e[0m"
     echo -e "\e[33m Client version changed from \e[0m\e[1m'$CURRENT_VER_CLIENT' \e[0mto \e[0m\e[1m'$NEW_VER_CLIENT'\e[0m"
@@ -66,7 +66,6 @@ then
 
 else
   echo -e "\e[31m Failed to install \e[0m\e[1mdocker-ce docker-ce-cli containerd.io\e[0m" >&2
-  exit 1
 fi
 
 #run Hello-World container
@@ -82,11 +81,6 @@ else
   echo -e "\e[31m Failed to run \e[0m\e[1m"Hello World" \e[31from container\e[0m" >&2
   echo -e "\e[33m Please, try to reistall docker stack\e[0m"
 fi
-
-#who run script?
-RUN_USER=$(export | grep SUDO_USER | sed 's/declare\|-\|x\|SUDO_USER\|=\|"\| //g')
-echo -e "\e[33mHello \e[0m\e[1m'$RUN_USER'!\e[0m"
-echo ""
 
 #lets go
 docker-compose version > /dev/null 2>&1
@@ -107,7 +101,6 @@ CHECK_NEW_VER=$(curl -l https://github.com/docker/compose/releases | grep /docke
 if [ $CHECK_CURRENT_VER == $CHECK_NEW_VER ]
 then
     echo -e "\e[32mVersion of docker-compose up-to-date!\e[0m"
-    exit 0
 else
     echo -e "\e[33m Found new version of docker-compose '$CHECH_CURRENT_VER'\e[0m"
 fi
@@ -123,21 +116,12 @@ then
   chmod +x $BINDIR
   echo -e "\e[32m Istallation of docker-compose complete!\e[0m"
   echo -e "\e[32m Version of docker-compose was changed from \e[0m\e[1m'$CHECK_CURRENT_VER' \e[31mto \e[0m\e[1m'$CHECK_NEW_VER'\e[0m"
-  exit 0
 else
   echo -e "\e[31m Failed to install docker-compose '$CHECK_NEW_VER' \e[31mto \e[0m\e[1m'/usr/local/bin/docker-compose'\e[0m" >&2
-  exit 1
 fi
 
-DOCKER_PATH=/etc/docker
-#who run script?
-RUN_USER=$(export | grep SUDO_USER | sed 's/declare\|-\|x\|SUDO_USER\|=\|"\| //g')
-echo -e "\e[33mHello \e[0m\e[1m'$RUN_USER'!\e[0m"
-echo ""
-
-#lets go
-
 #create file
+DOCKER_PATH=/etc/docker
 echo -e "\e[33m Creating daemon.json ...\e[0m"
 
 sudo cat /etc/docker/daemon.json > /dev/null 2>&1
@@ -152,7 +136,6 @@ else
   echo -e "\e[33m daemon.json not found. Creating...\e[0m" >&2
 fi
 
-
 #copy settings to daemon.json
 echo -e "\e[33m Create and Copy settings to daemon.json ...\e[0m"
 
@@ -165,7 +148,6 @@ then
   echo -e "\e[32m Done.\e[0m"
 else
   echo -e "\e[31m Copy failed! Abort\e[0m" >&2
-  exit 1
 fi
 
 #restart docker
@@ -178,7 +160,6 @@ then
   echo -e "\e[32m Done.\e[0m"
 else
   echo -e "\e[31m Daemon of docker can't been reload. Please, see docker logs, to fix problem\e[0m" >&2
-  exit 1
 fi
 
 #healthcheck
@@ -197,7 +178,12 @@ then
 
   then
      sudo docker-compose -f test.yml down && docker rmi redis:6-alpine --force
-     echo -e "\e[32m All Good. Bye\e[0m"
+     echo "
+██████████████████████████████████████████████████████████████████████████████████████████████
+█▄─█─▄██▀▄─██▄─▄▄▀█▄─▄█▄─▀█▀─▄█▄─▄█░▄▄░▄█─▄▄─█▄─▄─▀█▄─▄▄▀█▄─▄▄─█─▄─▄─██▀▄─██─▄─▄─█▄─▄▄─█▄─▄███
+██▄▀▄███─▀─███─██─██─███─█▄█─███─███▀▄█▀█─██─██─▄─▀██─▄─▄██─▄█▀███─████─▀─████─████─▄█▀██─██▀█
+▀▀▀▄▀▀▀▄▄▀▄▄▀▄▄▄▄▀▀▄▄▄▀▄▄▄▀▄▄▄▀▄▄▄▀▄▄▄▄▄▀▄▄▄▄▀▄▄▄▄▀▀▄▄▀▄▄▀▄▄▄▄▄▀▀▄▄▄▀▀▄▄▀▄▄▀▀▄▄▄▀▀▄▄▄▄▄▀▄▄▄▄▄▀
+"
      echo -e "\e[33m Don't forget copy data from daemon.json, if its necessary\e[0m"
      exit 0
   else
