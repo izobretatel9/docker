@@ -1,6 +1,6 @@
 #!/bin/bash
 #by @eberil
-#CHANGED by @izobretatel
+#CHANGED by @izobretatel9
 
 #who run script?
 RUN_USER=$(export | grep SUDO_USER | sed 's/declare\|-\|x\|SUDO_USER\|=\|"\| //g')
