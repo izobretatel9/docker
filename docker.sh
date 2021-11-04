@@ -95,8 +95,8 @@ else
   echo -e "\e[33m Docker-compose not Found\e[0m" >&2
 fi
 
-#CHECK_CURRENT_VER=$(docker-compose version | grep docker-compose | awk {'print $3'} | sed 's/,//g')
-CHECK_NEW_VER=$(curl -l https://github.com/docker/compose/releases | grep /docker/compose/releases/tag | grep -e [0-9].[0-9]*.[0-9] | grep -v rc | head -n 1 | sed 's/<\|a\|href=\|"\|docker\|compose\|release\|tag\|\/\|s\|//g' | sed 's/>/ /g' | awk {'print $2'})
+RELEASE_URL=$(curl -Ls -o /dev/null -w %{url_effective} https://github.com/docker/compose/releases/latest)
+CHECK_NEW_VER="${RELEASE_URL##*/}"
 
 if [ $CHECK_CURRENT_VER == $CHECK_NEW_VER ]
 then
