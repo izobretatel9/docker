@@ -38,7 +38,7 @@
 {"hosts": ["tcp://0.0.0.0:2375", "unix:///var/run/docker.sock"],
  "default-address-pools" : [
    {
-    "base" : "172.204.0.0/16",
+    "base" : "172.200.0.0/16",
     "size" : 24
    }
   ],
