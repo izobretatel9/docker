@@ -42,7 +42,7 @@
     "size" : 24
    }
   ],
- "data-root": "/var/lib/docker" # Change mount
+ "data-root": "/mnt/docker" # Change mount
 }
 ```
 2. Add `/etc/systemd/system/docker.service.d/override.conf`
