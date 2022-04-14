@@ -36,7 +36,7 @@ fi
 #Install requiement prerequisites and install docker
 echo -e "\e[32m Install requiement prerequisites for docker stack and install docker ce...\e[0m"
 
-apt-get update && \
+apt update -y && \
     apt-get -y install apt-transport-https \
     ca-certificates \
     curl \
