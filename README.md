@@ -64,6 +64,30 @@ systemctl restart docker.service
 ```
 docker -H tcp://xxx.xxx.x.xx:2375 ps
 ```
+## Dehouse - worker node on Ubuntu 22.04 base image with docker
+------------------------------------------------------
+P.s if you have a node on Ubuntu 22.04 and you want to use docker with volumes forwarding. Then see below.
+
+```
+systemctl stop kubelet
+```
+```
+mkdir -p /etc/systemd/system/docker.service.d/
+```
+```
+tee /etc/systemd/system/docker.service.d/docker.conf <<"EOF"
+[Service]
+ExecStart=
+ExecStart=/usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock --default-cgroupns-mode=host --exec-opt native.cgroupdriver=cgroupfs
+EOF
+```
+```
+rm -f /etc/docker/daemon.json
+```
+```
+sudo systemctl daemon-reload && systemctl restart docker && systemctl restart kubelet
+```
+
 ## P.s Изначальный создатель скрипта
 
 @eberil
