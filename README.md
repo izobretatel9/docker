@@ -64,7 +64,7 @@ systemctl restart docker.service
 ```
 docker -H tcp://xxx.xxx.x.xx:2375 ps
 ```
-## Dehouse - worker node on Ubuntu 22.04 base image with docker
+## Deckhouse - worker node on Ubuntu 22.04 base image with docker
 ------------------------------------------------------
 P.s if you have a node on Ubuntu 22.04 and you want to use docker with volumes forwarding. Then see below.
 
