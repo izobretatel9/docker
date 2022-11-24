@@ -78,7 +78,7 @@ mkdir -p /etc/systemd/system/docker.service.d/
 tee /etc/systemd/system/docker.service.d/docker.conf <<"EOF"
 [Service]
 ExecStart=
-ExecStart=/usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock --default-cgroupns-mode=host --exec-opt native.cgroupdriver=cgroupfs
+ExecStart=/usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock --default-cgroupns-mode=host
 EOF
 ```
 ```
