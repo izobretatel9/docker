@@ -82,9 +82,6 @@ ExecStart=/usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
 EOF
 ```
 ```
-rm -f /etc/docker/daemon.json
-```
-```
 sudo systemctl daemon-reload && systemctl restart docker && systemctl restart kubelet
 ```
 
