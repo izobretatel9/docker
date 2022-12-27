@@ -81,6 +81,14 @@ ExecStart=
 ExecStart=/usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock --default-cgroupns-mode=host
 EOF
 ```
+or without daemon.json
+```
+tee /etc/systemd/system/docker.service.d/docker.conf <<"EOF"
+[Service]
+ExecStart=
+ExecStart=/usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock --default-cgroupns-mode=host --exec-opt native.cgroupdriver=cgroupfs
+EOF
+```
 ```
 sudo systemctl daemon-reload && systemctl restart docker && systemctl restart kubelet
 ```
