@@ -92,11 +92,6 @@ EOF
 ```
 sudo systemctl daemon-reload && systemctl restart docker && systemctl restart kubelet
 ```
-
-## P.s Изначальный создатель скрипта
-
-@eberil
-
 ## Скрипт обновляется и поддерживается
 
 @izobretatel9
