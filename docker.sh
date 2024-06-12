@@ -110,6 +110,10 @@ cat << EOF > "$DOCKER_PATH/daemon.json"
    "base" : "172.200.0.0/16",
    "size" : 24
    }
+ ],
+ "registry-mirrors": [
+  "https://dockerhub1.beget.com",
+  "https://mirror.gcr.io"
  ]
 }
 EOF
