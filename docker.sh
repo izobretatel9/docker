@@ -119,7 +119,6 @@ cat << EOF > "$DOCKER_PATH/daemon.json"
 EOF
 
 cat << EOF > "$DOCKER_PATH/test.yml"
-version: "2.4"
 services:
  redis:
   image: library/redis:6-alpine
